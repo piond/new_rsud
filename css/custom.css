@@ -1,0 +1,81 @@
+h1 {
+	font-size : 1.85em;
+}
+h2 {
+	font-size : 1.7em;
+}
+h3 {
+	font-size : 1.55em;
+}
+h4 {
+	font-size : 1.4em;
+}
+h5 {
+	font-size : 1.25em;
+}
+h6 {
+	font-size : 1.1em;
+}
+article {
+	border-bottom : 1px dashed  #ccc;
+	margin-bottom : 10px;
+	padding-bottom : 5px;
+}
+footer {
+	background-color : #E7E7E7;
+	margin-top : 20px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	position :absolute;
+	bottom :0;
+	width : 100%;
+}
+html, body {
+	margin :0;
+	padding :0;
+	height : 100%;
+	/* margin-top : 30px; */
+}
+#wrapper {
+	min-height : 100%;
+	position :relative;
+}
+#contents {
+	padding-top : 70px;
+	padding-bottom : 100px;
+}
+hgroup h6 {
+	color : #ABABAB;
+}
+.nav-list .nav-header {
+	padding : 10px 15px;
+	text-transform : uppercase;
+	background-color : #F5F5F5;
+	color : #337AB7;
+}
+.navbar-default {
+	background-color : #337AB7;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+	color : #ffffff;
+}
+.navbar-default .navbar-nav > li > a {
+	color : #ffffff;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+	background-color : #0288D1;
+	color : #ffffff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+	background-color : #0288D1;
+	color : #ffffff;
+}
+.navbar-default .navbar-toggle {
+	border-color : #ffffff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color : #0288D1;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color : #ffffff;
+}

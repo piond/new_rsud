@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry kind="src" path="form"/>
+	<buildpathentry kind="src" path="ext"/>
+	<buildpathentry kind="src" path="widgets"/>
+	<buildpathentry kind="src" path="theme/views/site"/>
+	<buildpathentry kind="src" path="components"/>
+	<buildpathentry kind="src" path="theme/views/layouts"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/yii"/>
+	<buildpathentry kind="src" path="gii/bootstrap"/>
+</buildpath>
