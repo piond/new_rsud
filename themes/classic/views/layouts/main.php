@@ -45,11 +45,36 @@
 										'visible' => Yii::app()->user->isGuest
 									),
 									array(
-										'label' => 'Logout ('.Yii::app()->user->name.')',
-										'url' => array('/user/logout'),
-										'active' => false,
-										'visible' => !Yii::app()->user->isGuest
-									)
+										'label' => Yii::app()->user->name,
+										'url' => '#',
+										'visible' => !Yii::app()->user->isGuest,
+										'items' => array(
+											array(
+												'label' => 'Profile',
+												'url' => array('/user/profile')
+											),
+											array(
+												'label' => 'Account Settings',
+												'url' => array('/user/profile/edit')
+											),
+											array(
+												'label' => 'Rights',
+												'url' => array('/rights/authItem'),
+												'visible' => UserModule::isAdmin()
+											),
+											'---',
+											array(
+												'label' => 'Logout',
+												'url' => array('/user/logout'),
+											)
+										)
+									),
+									// array(
+										// 'label' => 'Logout ('.Yii::app()->user->name.')',
+										// 'url' => array('/user/logout'),
+										// 'active' => false,
+										// 'visible' => !Yii::app()->user->isGuest
+									// )
 								),
 								'htmlOptions' => array(
 									'class' => 'nav navbar-nav navbar-right'

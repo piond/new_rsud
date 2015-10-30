@@ -47,6 +47,10 @@ html, body {
 hgroup h6 {
 	color : #ABABAB;
 }
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+	background-color : #0288D1;
+	color : #ffffff;
+}
 .nav-list .nav-header {
 	padding : 10px 15px;
 	text-transform : uppercase;
