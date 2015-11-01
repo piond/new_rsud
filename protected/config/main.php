@@ -43,7 +43,11 @@ return array(
 		),
 		
 		'rights'=>array(
-			'install'=>true,
+			'install'=>false,
+			'layout'=>'webroot.themes.classic.views.layouts.column2',
+			// 'userNameColumn'=>'username',
+			// 'userClass'=>'Users',
+			// 'superuserName'=>'Admin'
 		),
 		
         'user'=>array(
@@ -64,10 +68,14 @@ return array(
 			'loginUrl'=>array('user/login'),
 		),
 		
-		 'authManager'=>array( 
+		'authManager'=>array( 
 			'class'=>'RDbAuthManager',
 			'defaultRoles'=>array('Guest'),
-		 ),
+			'assignmentTable'=>'authassignment',
+			'itemTable'=>'authitem',
+			'itemChildTable'=>'authitemchild',
+			'rightsTable'=>'rights'
+		),
 
 		// uncomment the following to enable URLs in path-format
 		

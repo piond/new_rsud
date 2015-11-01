@@ -53,7 +53,7 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 	<div class="row">
 		<div class="col-md-4">
 			<?php
-				echo $form->textFieldGroup(
+				echo $form->passwordFieldGroup(
 					$model,
 					'password',
 					array(

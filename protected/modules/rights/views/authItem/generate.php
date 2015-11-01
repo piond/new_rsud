@@ -11,11 +11,11 @@
 
 	<div class="form">
 
-		<?php $form=$this->beginWidget('CActiveForm'); ?>
+		<?php $form=$this->beginWidget('booster.widgets.TbActiveForm'); ?>
 
-			<div class="row">
+			
 
-				<table class="items generate-item-table" border="0" cellpadding="0" cellspacing="0">
+				<table class="table table-striped items generate-item-table" border="0" cellpadding="0" cellspacing="0">
 
 					<tbody>
 
@@ -36,11 +36,10 @@
 
 				</table>
 
-			</div>
+			
 
-			<div class="row">
-
-   				<?php echo CHtml::link(Rights::t('core', 'Select all'), '#', array(
+			
+				<?php echo CHtml::link(Rights::t('core', 'Select all'), '#', array(
    					'onclick'=>"jQuery('.generate-item-table').find(':checkbox').attr('checked', 'checked'); return false;",
    					'class'=>'selectAllLink')); ?>
    				/
@@ -48,11 +47,11 @@
 					'onclick'=>"jQuery('.generate-item-table').find(':checkbox').removeAttr('checked'); return false;",
 					'class'=>'selectNoneLink')); ?>
 
-			</div>
+			
 
-   			<div class="row">
-
-				<?php echo CHtml::submitButton(Rights::t('core', 'Generate')); ?>
+   			<div class="clearfix" style="margin-bottom:20px;">
+   				<br/>
+				<?php echo CHtml::submitButton(Rights::t('core', 'Generate'),array('class'=>'btn btn-primary')); ?>
 
 			</div>
 

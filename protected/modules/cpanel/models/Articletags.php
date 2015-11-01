@@ -6,7 +6,7 @@
  * The followings are the available columns in table '_articletags':
  * @property integer $id
  * @property integer $article_id
- * @property integer $tag_id1
+ * @property integer $tag_id
  */
 class Articletags extends CActiveRecord
 {
@@ -26,11 +26,11 @@ class Articletags extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('article_id, tag_id1', 'required'),
-			array('article_id, tag_id1', 'numerical', 'integerOnly'=>true),
+			array('article_id, tag_id', 'required'),
+			array('article_id, tag_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, article_id, tag_id1', 'safe', 'on'=>'search'),
+			array('id, article_id, tag_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -42,6 +42,8 @@ class Articletags extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'tags' => array(self::BELONGS_TO, 'Tags', 'tag_id'),
+			'article' => array(self::BELONGS_TO, 'Article', 'article_id')
 		);
 	}
 
@@ -53,7 +55,7 @@ class Articletags extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'article_id' => 'Article',
-			'tag_id1' => 'Tag Id1',
+			'tag_id' => 'Tag Id',
 		);
 	}
 
@@ -77,7 +79,7 @@ class Articletags extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('article_id',$this->article_id);
-		$criteria->compare('tag_id1',$this->tag_id1);
+		$criteria->compare('tag_id',$this->tag_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

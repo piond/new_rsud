@@ -14,6 +14,18 @@ $this->breadcrumbs=array(
 ?>
 
 <?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+<?php
 	$this->widget(
 		'booster.widgets.TbGridView',
 		array(
@@ -56,4 +68,8 @@ $this->breadcrumbs=array(
 			),
 		)
 	);
+?>
+
+<?php
+	$this->endWidget(); 
 ?>

@@ -37,11 +37,15 @@
 	</div>
 	
 	<?php
-		echo CHtml::errorSummary($model);
+		if(CHtml::errorSummary($model)){
+			echo '<div class="alert alert-danger">';
+				echo CHtml::errorSummary($model);
+			echo '</div>';
+		}
 	?>
 	
 	<?php
-		echo $form->textFieldGroup(
+		echo $form->passwordFieldGroup(
 			$model,
 			'password',
 			array(
@@ -59,10 +63,10 @@
 		);
 	?>
 	<?php
-		echo $form->error($model,'password');
+		// echo $form->error($model,'password');
 	?>
 	<?php
-		echo $form->textFieldGroup(
+		echo $form->passwordFieldGroup(
 			$model,
 			'verifyPassword',
 			array(
@@ -80,7 +84,7 @@
 		);
 	?>
 	<?php
-		echo $form->error($model,'verifyPassword');
+		// echo $form->error($model,'verifyPassword');
 	?>	
 	
 	<div class="form-actions text-right">

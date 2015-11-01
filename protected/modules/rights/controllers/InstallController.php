@@ -27,7 +27,7 @@ class InstallController extends RController
 
 		$this->_authorizer = $this->module->getAuthorizer();
 		$this->_installer = $this->module->getInstaller();
-		// $this->layout = $this->module->layout;
+		$this->layout = $this->module->layout;
 		$this->defaultAction = 'run';
 
 		// Register the scripts.

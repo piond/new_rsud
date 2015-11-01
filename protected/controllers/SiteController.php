@@ -8,6 +8,13 @@ class SiteController extends Controller
 	public $category;
 	public $layout='//layouts/column2';
 	
+	public function filters()
+	{
+		return array(
+		'rights', // perform access control for CRUD operations
+		);
+	}
+	
 	public function actions()
 	{
 		return array(

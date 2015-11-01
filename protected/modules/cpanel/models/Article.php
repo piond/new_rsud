@@ -4,7 +4,7 @@
  * This is the model class for table "_article".
  *
  * The followings are the available columns in table '_article':
- * @property integer $id
+ * @property integer $article_id
  * @property string $title
  * @property string $content
  * @property string $createdAt
@@ -19,6 +19,8 @@ class Article extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+	public $tags;
+	
 	public function tableName()
 	{
 		return '_article';
@@ -38,7 +40,7 @@ class Article extends CActiveRecord
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, content, createdAt, modifiedAt, published, author_id, views, category_id', 'safe', 'on'=>'search'),
+			array('article_id, title, content, createdAt, modifiedAt, published, author_id, views, category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +52,7 @@ class Article extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'articletags' => array(self::HAS_MANY, 'Articletags', 'article_id')
 		);
 	}
 
@@ -59,7 +62,7 @@ class Article extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'article_id' => 'ID',
 			'title' => 'Title',
 			'content' => 'Content',
 			'createdAt' => 'Created At',
@@ -89,7 +92,7 @@ class Article extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('article_id',$this->article_id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('createdAt',$this->createdAt,true);

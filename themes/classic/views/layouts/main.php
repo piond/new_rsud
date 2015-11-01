@@ -86,7 +86,7 @@
 			?>
 		</header>
 		<div class="container">
-			<div id="contents">
+			<div id="content">
 			<?php
 				// $this->widget(
 					// 'booster.widgets.TbBreadcrumbs',

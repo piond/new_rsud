@@ -4,7 +4,7 @@
  * This is the model class for table "_categories".
  *
  * The followings are the available columns in table '_categories':
- * @property integer $id
+ * @property integer $category_id
  * @property string $category
  */
 class Categories extends CActiveRecord
@@ -18,7 +18,7 @@ class Categories extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array valcategory_idation rules for model attributes.
 	 */
 	public function rules()
 	{
@@ -29,7 +29,7 @@ class Categories extends CActiveRecord
 			array('category', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category', 'safe', 'on'=>'search'),
+			array('category_id, category', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,7 +50,7 @@ class Categories extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'category_id' => 'ID',
 			'category' => 'Category',
 		);
 	}
@@ -60,11 +60,11 @@ class Categories extends CActiveRecord
 	 *
 	 * Typical usecase:
 	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * - Execute this method to get CActiveDataProvcategory_ider instance which will filter
 	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 * - Pass data provcategory_ider to CGrcategory_idView, CListView or any similar wcategory_idget.
 	 *
-	 * @return CActiveDataProvider the data provider that can return the models
+	 * @return CActiveDataProvcategory_ider the data provcategory_ider that can return the models
 	 * based on the search/filter conditions.
 	 */
 	public function search()
@@ -73,10 +73,10 @@ class Categories extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('category',$this->category,true);
 
-		return new CActiveDataProvider($this, array(
+		return new CActiveDataProvcategory_ider($this, array(
 			'criteria'=>$criteria,
 		));
 	}

@@ -29,33 +29,61 @@ footer {
 	position :absolute;
 	bottom :0;
 	width : 100%;
+	border-top : 1px solid #ddd;
 }
 html, body {
 	margin :0;
 	padding :0;
 	height : 100%;
 	/* margin-top : 30px; */
+	color : #1B1E24;
 }
 #wrapper {
 	min-height : 100%;
 	position :relative;
 }
-#contents {
+#content {
 	padding-top : 70px;
 	padding-bottom : 100px;
 }
-hgroup h6 {
-	color : #ABABAB;
+.bootstrap-switch,
+.btn,
+.breadcrumb, 
+.panel, 
+.alert, 
+.form-control, 
+.form-control:focus,
+.select2-container-multi .select2-choices,
+.select2-drop.select2-drop-above,
+.select2-drop,
+.select2-dropdown-open.select2-drop-above [class^="select2-choice"],
+.select2-container-multi .select2-choices .select2-search-choice,
+.bootstrap-switch .bootstrap-switch-handle-off,
+.bootstrap-switch .bootstrap-switch-handle-on,
+.bootstrap-switch.bootstrap-switch-focused ,
+.cke_chrome,
+.dropdown-menu{
+	border-radius : 0px !important;
+	box-shadow : none !important;
+}
+.form-control:focus,
+.select2-container.select2-container-multi.form-control.select2-container-active .select2-choices{
+	border-color : #66afe9;
+	box-shadow : none;
+}
+.breadcrumb {
+	border : 1px solid #DDD;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
 	background-color : #0288D1;
 	color : #ffffff;
 }
 .nav-list .nav-header {
-	padding : 10px 15px;
-	text-transform : uppercase;
+	padding : 8px 15px;
+	/* text-transform : uppercase; */
 	background-color : #F5F5F5;
-	color : #337AB7;
+	color : #777;
+	border : 1px solid #DDD;
 }
 .navbar-default {
 	background-color : #337AB7;

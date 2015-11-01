@@ -63,19 +63,39 @@
 	<?php //echo $form->textAreaGroup($model,'title', array('widgetOptions'=>array('htmlOptions'=>array('rows'=>6, 'cols'=>50)))); ?>
 
 	<?php
-		echo $form->markdownEditorGroup(
+		// echo $form->markdownEditorGroup(
+			// $model,
+			// 'content',
+			// array(
+				// 'widgetOptions' => array(
+					// 'htmlOptions' => array(
+						// 'style' => 'height:200px;'
+					// )
+				// )
+			// )
+		// );
+	?>
+	
+	<?php 
+		echo $form->ckEditorGroup(
 			$model,
 			'content',
 			array(
+		   		'wrapperHtmlOptions' => array(
+					/* 'class' => 'col-sm-5', */
+				),
 				'widgetOptions' => array(
-					'htmlOptions' => array(
-						'style' => 'height:200px;'
+					'editorOptions' => array(
+						'fullpage' => 'js:true',
+						/* 'width' => '640', */
+						/* 'resize_maxWidth' => '640', */
+						/* 'resize_minWidth' => '320'*/
 					)
 				)
 			)
 		);
 	?>
-	
+		
 	<?php //echo $form->textAreaGroup($model,'content', array('widgetOptions'=>array('htmlOptions'=>array('rows'=>6, 'cols'=>50)))); ?>
 
 	<?php
@@ -135,6 +155,9 @@
 	?>
 	
 	<?php
+		$categories = Categories::model()->findAll(array('order'=>'category'));
+		$category_list = CHtml::listData($categories, 'category_id', 'category');
+		
 		echo $form->dropDownListGroup(
 			$model,
 			'category_id',
@@ -143,7 +166,7 @@
 					// 'class' => 'col-sm-5'
 				),
 				'widgetOptions' => array(
-					'data' => $list
+					'data' => $category_list
 				)
 			)
 		);
@@ -162,8 +185,34 @@
 			// )
 		// );
 	?>
+	
+	<?php
+		$tags = Tags::model()->findAll(array('order'=>'tag'));
+		foreach($tags as $tag){
+			$arrTags[] = $tag->tag;
+		}
+		
+		echo $form->select2Group(
+			$model,
+			'tags',
+			array(
+				'wrapperHtmlOptions' => array(
+					// 'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+					'asDropDownList' => false,
+					'options' => array(
+						'tags' => $arrTags,
+						// 'placeholder' => 'type clever, or is, or just type!',
+						/* 'width' => '40%', */
+						'tokenSeparators' => array(',', ' ')
+					)
+				)
+			)
+		);
+	?>
 
-<div class="form-actions">
+<div class="form-actions text-right">
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',

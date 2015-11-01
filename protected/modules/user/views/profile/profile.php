@@ -29,7 +29,7 @@
 	$box = $this->beginWidget(
 		'booster.widgets.TbPanel',
 		array(
-			'title' => '<strong>'.UserModule::t('Your profile').'</strong>',
+			'title' => '<h4>'.UserModule::t('Your profile').'</h4>',
 			// 'headerIcon' => 'th-list',
 			'padContent' => false,
 			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
@@ -66,7 +66,7 @@
 	$box = $this->beginWidget(
 		'booster.widgets.TbPanel',
 		array(
-			'title' => '<strong>Information</strong>',
+			'title' => '<h4>Information</h4>',
 			// 'headerIcon' => 'th-list',
 			'padContent' => false,
 			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')

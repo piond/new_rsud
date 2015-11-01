@@ -14,7 +14,7 @@ class ArticleController extends Controller
 	public function filters()
 	{
 		return array(
-		'accessControl', // perform access control for CRUD operations
+		'rights', // perform access control for CRUD operations
 		);
 	}
 
@@ -54,6 +54,7 @@ class ArticleController extends Controller
 	*/
 	public function actionView($id)
 	{
+		// $this->layout = '//layouts/column1';
 		$this->render(
 			'view',
 			array(
@@ -66,20 +67,20 @@ class ArticleController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
+	public function getAllTags(){
+		$tags = Tags::model()->findAll();
+		$arrTags = CHtml::listData($tags, 'tag_id', 'tag');
+		
+		return $arrTags;
+	}
 	public function actionCreate()
 	{
 		$connection = Yii::app()->db;
 		$transaction = $connection->beginTransaction();
 		
 		$model = new Article;
-		$_tags = new Tags;
-		$_articleTag = new Articletags;
 		
-		$tags = Tags::model()->findAll(array('order'=>'tag'));
-		$tags_list = CHtml::listData($tags, 'id', 'tag');
-		
-		$categories = Categories::model()->findAll(array('order'=>'category'));
-		$category_list = CHtml::listData($categories, 'id', 'category');
+		$arrTags = $this->getAllTags();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -93,8 +94,29 @@ class ArticleController extends Controller
 
 			try{
 				if($model->save()){
+					$articleId = $model->article_id;
+					$postToLower = strtolower($_POST['Article']['tags']);
+					$arrPostTags = explode(',', $postToLower);
+					$arrDiffTags = array_diff($arrPostTags,$arrTags);
+					if(!empty($arrDiffTags)){
+						foreach($arrDiffTags as $arrDiffTag){
+							$row[] = array('tag'=>$arrDiffTag);
+						}
+						GeneralRepository::insertSeveral(Tags::model()->tableName(),$row);
+					}
+					
+					$newArrTags = $this->getAllTags();
+					$newArrDiffTags = array_intersect($newArrTags, $arrPostTags);
+					foreach($newArrDiffTags as $key=>$newArrDiffTag){
+						$newRow[] = array(
+							'article_id' => $articleId,
+							'tag_id' => $key
+						);
+					}
+					GeneralRepository::insertSeveral(Articletags::model()->tableName(),$newRow);
+					
 					$transaction->commit();
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id'=>$model->article_id));
 				}
 			}catch(Exception $e){
 				$transaction->rollback();
@@ -106,9 +128,7 @@ class ArticleController extends Controller
 		$this->render(
 			'create',
 			array(
-				'model'=>$model,
-				'list'=>$category_list,
-				'tags'=>$tags_list
+				'model'=>$model
 			)
 		);
 	}
@@ -120,10 +140,13 @@ class ArticleController extends Controller
 	*/
 	public function actionUpdate($id)
 	{
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
+		
 		$model=$this->loadModel($id);
-		$categories = Categories::model()->findAll(array('order'=>'category'));
-		$category_list = CHtml::listData($categories, 'id', 'category');
 
+		$arrTags = $this->getAllTags();
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -132,16 +155,43 @@ class ArticleController extends Controller
 			$model->attributes=$_POST['Article'];
 			$model->modifiedAt = date('Y-m-d');
 			
-			if($model->save()){
-				$this->redirect(array('view','id'=>$model->id));
+			try{
+				if($model->save()){
+					$articleId = $model->article_id;
+					$postToLower = strtolower($_POST['Article']['tags']);
+					$arrPostTags = explode(',', $postToLower);
+					$arrDiffTags = array_diff($arrPostTags,$arrTags);
+					if(!empty($arrDiffTags)){
+						foreach($arrDiffTags as $arrDiffTag){
+							$row[] = array('tag'=>$arrDiffTag);
+						}
+						GeneralRepository::insertSeveral(Tags::model()->tableName(),$row);
+					}
+					
+					$newArrTags = $this->getAllTags();
+					$newArrDiffTags = array_intersect($newArrTags, $arrPostTags);
+					foreach($newArrDiffTags as $key=>$newArrDiffTag){
+						$newRow[] = array(
+							'article_id' => $articleId,
+							'tag_id' => $key
+						);
+					}
+					GeneralRepository::insertSeveral(Articletags::model()->tableName(),$newRow);
+					
+					$transaction->commit();
+					$this->redirect(array('view','id'=>$model->article_id));
+				}
+			}catch(Exception $e){
+				$transaction->rollback();
+				Yii::app()->user->setFlash('error', "{$e->getMessage()}");
+				$this->refresh();
 			}
 		}
 
 		$this->render(
 			'update',
 			array(
-				'model'=>$model,
-				'list'=>$category_list
+				'model'=>$model
 			)
 		);
 	}
@@ -173,6 +223,7 @@ class ArticleController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Article');
+		
 		$this->render(
 			'index',
 			array(
@@ -224,5 +275,80 @@ class ArticleController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionIni(){
+		$criteria = new CDbCriteria(
+			array(
+				'alias' => '_articletags',
+				'condition' => '_articletags.id=8',
+				'with' => array(
+					'tags' => array(
+						'alias' => '_tags'
+					),
+					'article' => array(
+						'alias' => '_article'
+					)
+				)
+			)
+		);
+		
+		$dataProvider = new CActiveDataProvider(
+			'Articletags',array(
+				'criteria'=>$criteria,
+				'pagination'=>array(
+					'pageSize'=>10,
+				),
+			)
+		);
+		
+		$criteria2 = new CDbCriteria(
+			array(
+				'alias' => '_article',
+				'condition' => '_article.article_id=1',
+				'with' => array(
+					'articletags' => array(
+						'alias' => '_articletags',
+						'with' => array(
+							'tags' => array(
+								'alias' => '_tags'
+							)
+						)
+					)
+				)
+			)
+		);
+		
+		$dataProvider2 = new CActiveDataProvider(
+			'Article',array(
+				'criteria'=>$criteria2,
+				'pagination'=>array(
+					'pageSize'=>10,
+				),
+			)
+		);
+		
+		$criteria3 = new CDbCriteria(
+			array(
+				'alias' => '_tags',
+				'condition' => '_tags.tag_id=1',
+				'with' => array(
+					'articletags' => array(
+						'alias' => '_articletags'
+					)
+				)
+			)
+		);
+		
+		$dataProvider3 = new CActiveDataProvider(
+			'Tags',array(
+				'criteria'=>$criteria3,
+				'pagination'=>array(
+					'pageSize'=>10,
+				),
+			)
+		);
+		
+		print_r($dataProvider3->getData());
 	}
 }

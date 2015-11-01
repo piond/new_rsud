@@ -1,7 +1,7 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
 	<div class="row">
-		<section class="col-md-8">
+		<section class="col-md-9">
 			<!--<div id="content">-->
 				<?php
 					$this->widget(
@@ -14,8 +14,24 @@
 				<?php echo $content; ?>
 			<!--</div>-->
 		</section>
-		<section class="col-md-4">
+		<section class="col-md-3">
 			<aside>
+				<?php
+					$box = $this->beginWidget(
+						'booster.widgets.TbPanel',
+						array(
+							'title' => false,
+							// 'headerIcon' => 'th-list',
+							'padContent' => true,
+							// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+						)
+					);
+				?>
+					dsdsd
+				<?php
+					$this->endWidget(); 
+				?>
+
 				<?php
 					$this->widget(
 						'booster.widgets.TbMenu',
