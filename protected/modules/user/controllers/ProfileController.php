@@ -15,10 +15,45 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
-	    $this->render('profile',array(
-	    	'model'=>$model,
-			'profile'=>$model->profile,
-	    ));
+		
+		$attributes = array(
+			'username' => array(
+				'label' => 'Username',
+				'value' => $model->username
+			),
+			'email' => array(
+				'label' => 'E-mail',
+				'value' => $model->email
+			),
+			'createtime' => array(
+				'label' => 'Created at',
+				'value' => date("d.m.Y H:i:s",$model->createtime),
+			),
+			'lastvisit' => array(
+				'label' => 'Last visited at',
+				'value' => date("d.m.Y H:i:s",$model->lastvisit),
+			),
+			'status' => array(
+				'label' => 'Status',
+				'value' => User::itemAlias("UserStatus",$model->status),
+			)
+		);
+		
+		$profileFields = ProfileField::model()->forOwner()->sort()->findAll();
+			if ($profileFields) {
+				foreach($profileFields as $field) {
+					$attributes[$field->varname] = array(
+						'label' => UserModule::t($field->title),
+						'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
+					);
+				}
+			}
+		
+	    $this->render('profile',
+			array(
+			'attributes' => $attributes
+			)
+		);
 	}
 
 

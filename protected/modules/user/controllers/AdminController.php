@@ -56,8 +56,52 @@ class AdminController extends Controller
 	public function actionView()
 	{
 		$model = $this->loadModel();
+		
+		$attributes = array(
+			'id',
+			'username'
+		);
+		
+		$profileFields = ProfileField::model()->forOwner()->sort()->findAll();
+			if ($profileFields) {
+				foreach($profileFields as $field) {
+					array_push(
+						$attributes,
+						array(
+							'label' => UserModule::t($field->title),
+							'name' => $field->varname,
+							'type'=>'raw',
+							'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
+						)
+					);
+				}
+			}
+			
+		array_push($attributes,
+			'password',
+			'email',
+			'activkey',
+			array(
+				'name' => 'createtime',
+				'value' => date("d.m.Y H:i:s",$model->createtime),
+			),
+			array(
+				'name' => 'lastvisit',
+				'value' => (($model->lastvisit)?date("d.m.Y H:i:s",$model->lastvisit):UserModule::t("Not visited")),
+			),
+			array(
+				'name' => 'superuser',
+				'value' => User::itemAlias("AdminStatus",$model->superuser),
+			),
+			array(
+				'name' => 'status',
+				'value' => User::itemAlias("UserStatus",$model->status),
+			)
+		);
+		
 		$this->render('view',array(
 			'model'=>$model,
+			'attributes' => $attributes
 		));
 	}
 
@@ -156,7 +200,7 @@ class AdminController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=User::model()->notsafe()->findbyPk($_GET['id']);
+				$this->_model = User::model()->notsafe()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

@@ -38,31 +38,7 @@
 			);
 		?>
 			<div class="profile_heading">
-				<?php
-					//echo CHtml::image(Yii::app()->request->baseUrl.'/images/photo/914-a9789186ff-kreavi-1446364093.jpg');
-				?>
-				<img src="http://localhost/project/new_rsud/images/photo/914-a9789186ff-kreavi-1446364093.jpg" width="260.5px">
-			<?php
-				// $this->widget(
-					// 'booster.widgets.TbDetailView',
-					// array(
-						// 'data' => array(
-							// 'Username' => CHtml::encode($model->username),
-							// 'Email' => CHtml::encode($model->email),
-							// 'RegistrationDate' => date("d.m.Y H:i:s",$model->createtime),
-							// 'LastVisited' => date("d.m.Y H:i:s",$model->lastvisit),
-							// 'Status' => CHtml::encode(User::itemAlias("UserStatus",$model->status))
-						// ),
-						// 'attributes' => array(
-							// array('name' => 'Username', 'label' => 'Username'),
-							// array('name' => 'Email', 'label' => 'E-mail'),
-							// array('name' => 'RegistrationDate', 'label' => 'Registration Date'),
-							// array('name' => 'LastVisited', 'label' => 'Last Visited'),
-							// array('name' => 'Status', 'label' => 'Status'),
-						// ),
-					// )
-				// );
-			?>
+				<img src="<?php echo Yii::app()->request->baseUrl.'/'.$attributes['photo']['value']; ?>" width="260.5px">
 			</div>
 			<div class="navigation">
 				<?php
@@ -105,26 +81,15 @@
 
 			<table class="table">
 				<?php 
-					$profileFields=ProfileField::model()->forOwner()->sort()->findAll();
-					
-					if ($profileFields) {
-						foreach($profileFields as $field) {
-								//echo "<pre>"; print_r($profile); die();
-				?>
-						<tr>
-							<th>
-								<?php
-									echo CHtml::encode(UserModule::t($field->title));
-								?>
-							</th>
-							<td>
-								<?php
-									echo (($field->widgetView($profile))?$field->widgetView($profile):CHtml::encode((($field->range)?Profile::range($field->range,$profile->getAttribute($field->varname)):$profile->getAttribute($field->varname))));
-								?>
-							</td>
-						</tr>
-				<?php
-						}//$profile->getAttribute($field->varname)
+					foreach($attributes as $show){
+						echo '<tr>';
+							echo '<th>';
+								echo $show['label'];
+							echo '</th>';
+							echo '<td>';
+								echo $show['value'];
+							echo '</td>';
+						echo '</tr>';
 					}
 				?>
 			</table>
