@@ -34,7 +34,15 @@
 			<strong>
 				Tags :
 			</strong>
-			<a href="">RSUD</a>, <a href="">Kesehatan</a>
+			<?php
+				foreach($data->articletags as $articletag){
+					$tags[] = '<a href="#">'.$articletag->tags['tag'].'</a>';
+				}
+				if(isset($tags)){
+					$tags = implode($tags, ', ');
+					echo $tags;
+				}
+			?>
 		</div>
 		<div class="col-md-4">
 			<h6>

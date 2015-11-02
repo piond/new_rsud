@@ -54,7 +54,6 @@ class ArticleController extends Controller
 	*/
 	public function actionView($id)
 	{
-		// $this->layout = '//layouts/column1';
 		$this->render(
 			'view',
 			array(
@@ -269,7 +268,30 @@ class ArticleController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider = new CActiveDataProvider('Article');
+		$criteria = new CDbCriteria(
+			array(
+				'alias' => '_article',
+				'with' => array(
+					'articletags' => array(
+						'alias' => '_articletags',
+						'with' => array(
+							'tags' => array(
+								'alias' => '_tags'
+							)
+						)
+					)
+				)
+			)
+		);
+		
+		$dataProvider = new CActiveDataProvider(
+			'Article',array(
+				'criteria'=>$criteria,
+				'pagination'=>array(
+					'pageSize'=>10,
+				),
+			)
+		);
 		
 		$this->render(
 			'index',
