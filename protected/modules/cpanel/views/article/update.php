@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 		'_form',
 		array(
 			'model' => $model,
-			'initTag' => $initTag
+			'category_list' => $category_list
 		)
 	);
 ?>

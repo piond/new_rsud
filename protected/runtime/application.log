@@ -6947,3 +6947,7 @@ REQUEST_URI=/project/new_rsud/index.php/user/profile
 in C:\xampp\htdocs\project\new_rsud\protected\modules\user\views\profile\profile.php (42)
 in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (21)
 in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 03:10:08 [warning] [application] Gagal mengeset atribut unsafe "tags" dari kelas "Article".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\cpanel\controllers\ArticleController.php (185)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\rights\components\RController.php (36)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)

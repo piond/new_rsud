@@ -32,7 +32,8 @@ $this->menu=array(
 	echo $this->renderPartial(
 		'_form',
 		array(
-			'model'=>$model
+			'model' => $model,
+			'category_list' => $category_list
 		)
 	);
 ?>

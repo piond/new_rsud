@@ -67,6 +67,13 @@ class ArticleController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
+	protected function getAllCategories(){
+		$categories = Categories::model()->findAll(array('order'=>'category'));
+		$category_list = CHtml::listData($categories, 'category_id', 'category');
+		
+		return $category_list;
+	}
+	
 	protected function getAllTags(){
 		$tags = Tags::model()->findAll();
 		$arrTags = CHtml::listData($tags, 'tag_id', 'tag');
@@ -100,6 +107,8 @@ class ArticleController extends Controller
 			
 			$tag[$_tagsId] = $_tagName;
 		}
+		$tag = implode($tag, ',');
+		
 		return $tag;
 	}
 	
@@ -158,7 +167,8 @@ class ArticleController extends Controller
 		$this->render(
 			'create',
 			array(
-				'model'=>$model
+				'model'=>$model,
+				'category_list' => $this->getAllCategories()
 			)
 		);
 	}
@@ -222,11 +232,13 @@ class ArticleController extends Controller
 			}
 		}
 
+		$model['tags'] = $this->getArticleTags($id);
+		
 		$this->render(
 			'update',
 			array(
 				'model'=>$model,
-				'initTag' => $this->getArticleTags($id)
+				'category_list' => $this->getAllCategories()
 			)
 		);
 	}
@@ -257,7 +269,7 @@ class ArticleController extends Controller
 	*/
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Article');
+		$dataProvider = new CActiveDataProvider('Article');
 		
 		$this->render(
 			'index',
