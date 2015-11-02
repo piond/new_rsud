@@ -80,3 +80,7 @@ article {
 .panel-default > .panel-heading {
 	color : #777;
 }
+.img-thumbnail {
+	border : none;
+	border-radius : 0px;
+}

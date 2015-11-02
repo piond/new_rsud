@@ -7204,3 +7204,39 @@ REQUEST_URI=/project/new_rsud/index.php/user/profile
 in C:\xampp\htdocs\project\new_rsud\protected\modules\user\views\profile\profile.php (90)
 in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (56)
 in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:26:32 [warning] [application] Gagal mengeset atribut unsafe "blob" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (79)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:26:32 [warning] [application] Gagal mengeset atribut unsafe "binary" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (79)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:26:32 [warning] [application] Gagal mengeset atribut unsafe "uwfdel" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (79)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:28:44 [warning] [application] Gagal mengeset atribut unsafe "blob" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:28:44 [warning] [application] Gagal mengeset atribut unsafe "binary" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:28:44 [warning] [application] Gagal mengeset atribut unsafe "uwfdel" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:38:30 [warning] [application] Gagal mengeset atribut unsafe "blob" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:38:30 [warning] [application] Gagal mengeset atribut unsafe "binary" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)
+2015/11/02 05:38:30 [warning] [application] Gagal mengeset atribut unsafe "uwfdel" dari kelas "Profile".
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\components\UActiveRecord.php (29)
+in C:\xampp\htdocs\project\new_rsud\protected\modules\user\controllers\ProfileController.php (78)
+in C:\xampp\htdocs\project\new_rsud\index.php (13)

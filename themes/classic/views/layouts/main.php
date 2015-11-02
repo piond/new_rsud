@@ -12,6 +12,8 @@
 		<style>
 			.profile_heading {
 				background-color : #F5F5F5;
+				min-width : 260.5px;
+				min-height : 260.5px;
 			}
 			.navigation .nav-list li a {
 				border-top : 1px solid #ccc;

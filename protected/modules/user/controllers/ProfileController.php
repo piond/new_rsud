@@ -44,16 +44,15 @@ class ProfileController extends Controller
 				foreach($profileFields as $field) {
 					$attributes[$field->varname] = array(
 						'label' => UserModule::t($field->title),
-						'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
+						'value' => $model->profile->getAttribute($field->varname)
+						// 'value' => (($field->widgetView($model->profile))?$field->widgetView($model->profile):(($field->range)?Profile::range($field->range,$model->profile->getAttribute($field->varname)):$model->profile->getAttribute($field->varname))),
 					);
 				}
 			}
 		
-	    $this->render('profile',
-			array(
+	    $this->render('profile',array(
 			'attributes' => $attributes
-			)
-		);
+	    ));
 	}
 
 
