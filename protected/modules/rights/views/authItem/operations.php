@@ -1,63 +1,97 @@
-<?php $this->breadcrumbs = array(
-	'Rights'=>Rights::getBaseUrl(),
-	Rights::t('core', 'Operations'),
-); ?>
+<?php 
+	$this->breadcrumbs = array(
+		'Rights'=>Rights::getBaseUrl(),
+		Rights::t('core', 'Operations'),
+	); 
+	
+	$this->title = '<h2>'.Rights::t('core', 'Operations').'</h2>';
+?>
 
-<div id="operations">
+<?php
+	echo $this->renderPartial('/_menu',array(
+		'list'=> array(),
+	));
+?>
 
-	<h2><?php echo Rights::t('core', 'Operations'); ?></h2>
+<?php 
+	$this->renderPartial('/_flash'); 
+?>
 
+<div class="alert alert-info">
 	<p>
-		<?php echo Rights::t('core', 'An operation is a permission to perform a single operation, for example accessing a certain controller action.'); ?><br />
-		<?php echo Rights::t('core', 'Operations exist below tasks in the authorization hierarchy and can therefore only inherit from other operations.'); ?>
+		<?php 
+			echo Rights::t('core', 'An operation is a permission to perform a single operation, for example accessing a certain controller action.'); 
+		?><br />
+		<?php 
+			echo Rights::t('core', 'Operations exist below tasks in the authorization hierarchy and can therefore only inherit from other operations.'); 
+		?>
 	</p>
 
-	<p><?php echo CHtml::link(Rights::t('core', 'Create a new operation'), array('authItem/create', 'type'=>CAuthItem::TYPE_OPERATION), array(
-		'class'=>'add-operation-link',
-	)); ?></p>
+	<p>
+		<?php 
+			echo CHtml::link(Rights::t('core', 'Create a new operation'), array('authItem/create', 'type'=>CAuthItem::TYPE_OPERATION), array(
+				'class'=>'add-operation-link',
+			)); 
+		?>
+	</p>
+</div>
 
-	<?php $this->widget('booster.widgets.TbGridView', array(
-	    'dataProvider'=>$dataProvider,
-	    'template'=>'{items}',
-	    'emptyText'=>Rights::t('core', 'No operations found.'),
-	    'htmlOptions'=>array('class'=>'grid-view operation-table sortable-table'),
-	    'columns'=>array(
-	    	array(
-    			'name'=>'name',
-    			'header'=>Rights::t('core', 'Name'),
-    			'type'=>'raw',
-    			'htmlOptions'=>array('class'=>'name-column'),
-    			'value'=>'$data->getGridNameLink()',
-    		),
-    		array(
-    			'name'=>'description',
-    			'header'=>Rights::t('core', 'Description'),
-    			'type'=>'raw',
-    			'htmlOptions'=>array('class'=>'description-column'),
-    		),
-    		array(
-    			'name'=>'bizRule',
-    			'header'=>Rights::t('core', 'Business rule'),
-    			'type'=>'raw',
-    			'htmlOptions'=>array('class'=>'bizrule-column'),
-    			'visible'=>Rights::module()->enableBizRule===true,
-    		),
-    		array(
-    			'name'=>'data',
-    			'header'=>Rights::t('core', 'Data'),
-    			'type'=>'raw',
-    			'htmlOptions'=>array('class'=>'data-column'),
-    			'visible'=>Rights::module()->enableBizRuleData===true,
-    		),
-    		array(
-    			'header'=>'&nbsp;',
-    			'type'=>'raw',
-    			'htmlOptions'=>array('class'=>'actions-column'),
-    			'value'=>'$data->getDeleteOperationLink()',
-    		),
-	    )
-	)); ?>
+<?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+	<?php 
+		$this->widget('booster.widgets.TbGridView', array(
+			'dataProvider'=>$dataProvider,
+			'template'=>'{items}',
+			'emptyText'=>Rights::t('core', 'No operations found.'),
+			'htmlOptions'=>array('class'=>'grid-view operation-table sortable-table'),
+			'columns'=>array(
+				array(
+					'name'=>'name',
+					'header'=>Rights::t('core', 'Name'),
+					'type'=>'raw',
+					'htmlOptions'=>array('class'=>'name-column'),
+					'value'=>'$data->getGridNameLink()',
+				),
+				array(
+					'name'=>'description',
+					'header'=>Rights::t('core', 'Description'),
+					'type'=>'raw',
+					'htmlOptions'=>array('class'=>'description-column'),
+				),
+				array(
+					'name'=>'bizRule',
+					'header'=>Rights::t('core', 'Business rule'),
+					'type'=>'raw',
+					'htmlOptions'=>array('class'=>'bizrule-column'),
+					'visible'=>Rights::module()->enableBizRule===true,
+				),
+				array(
+					'name'=>'data',
+					'header'=>Rights::t('core', 'Data'),
+					'type'=>'raw',
+					'htmlOptions'=>array('class'=>'data-column'),
+					'visible'=>Rights::module()->enableBizRuleData===true,
+				),
+				array(
+					'header'=>'&nbsp;',
+					'type'=>'raw',
+					'htmlOptions'=>array('class'=>'actions-column'),
+					'value'=>'$data->getDeleteOperationLink()',
+				),
+			)
+		)); 
+	?>
 
 	<p class="info"><?php echo Rights::t('core', 'Values within square brackets tell how many children each item has.'); ?></p>
 
-</div>
+<?php $this->endWidget(); ?>

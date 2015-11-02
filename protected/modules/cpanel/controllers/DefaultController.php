@@ -4,6 +4,13 @@ class DefaultController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		$dataProvider = new CActiveDataProvider('Article');
+		
+		$this->render(
+			'/article/index',
+			array(
+				'dataProvider'=>$dataProvider,
+			)
+		);
 	}
 }

@@ -39,7 +39,7 @@
 		?>
 			<div class="profile_heading">
 				<?php
-					if($attributes['photo']){
+					if(isset($attributes['photo'])){
 						if(file_exists(Yii::getPathofAlias('webroot').'/'.$attributes['photo']['value'])){
 				?>
 						<img src="<?php echo Yii::app()->getBaseUrl(true).'/'.$attributes['photo']['value']; ?>" class="img-thumbnail">

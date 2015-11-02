@@ -61,4 +61,8 @@ class RController extends CController
 		else
 			throw new CHttpException(403, $message);
 	}
+	/**
+	*Add global variable
+	*/
+	public $title = '';
 }

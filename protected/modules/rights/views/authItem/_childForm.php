@@ -1,16 +1,26 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm'); ?>
+<?php 
+	$form=$this->beginWidget('CActiveForm'); ?>
 	
-	<div class="row">
-		<?php echo $form->dropDownList($model, 'itemname', $itemnameSelectOptions); ?>
-		<?php echo $form->error($model, 'itemname'); ?>
-	</div>
-	
-	<div class="row buttons">
-		<?php echo CHtml::submitButton(Rights::t('core', 'Add')); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
+		<div class="form-group">
+			<?php echo $form->dropDownList($model, 'itemname', $itemnameSelectOptions, array('class' => 'form-control')); ?>
+			<?php echo $form->error($model, 'itemname'); ?>
+		</div>
+		
+		<div class="form-actions text-right">
+			<?php
+				$this->widget(
+					'booster.widgets.TbButton', array(
+						'buttonType'=>'submit',
+						'context'=>'primary',
+						'label'=>'Add',
+					)
+				);
+			?>
+		</div>
+<?php
+	$this->endWidget();
+?>
 
 </div>

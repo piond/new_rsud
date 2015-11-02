@@ -77,10 +77,19 @@ article {
 	color : #777;
 	border : 1px solid #DDD;
 }
-.panel-default > .panel-heading {
+.panel-default > .panel-heading h3 {
 	color : #777;
+	font-weight : bold;
 }
 .img-thumbnail {
 	border : none;
 	border-radius : 0px;
+}
+.profile_heading {
+	background-color : #F5F5F5;
+	min-height : 260.5px;
+}
+.navigation .nav-list li a {
+	border-top : 1px solid #ccc;
+	background-color : #F5F5F5;
 }

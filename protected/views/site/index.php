@@ -9,43 +9,6 @@ Yii::app()->clientScript->registerMetaTag('RSUD Temanggung', 'description');
 Yii::app()->clientScript->registerMetaTag('RSUD Temanggung', null, 'author');
 		
 $this->pageTitle=Yii::app()->name;
-
-$this->category = array(
-	array(
-		'label' => 'Categories',
-		'itemOptions' => array(
-			'class' => 'nav-header'
-		)
-	),
-	array(
-		'label' => 'Instalasi Gawat Darurat',
-		'itemOptions' => array(
-			'class' => 'active'
-		),
-		'url' => array('admin')
-	),
-	array(
-		'label' => 'Instalasi Rawat Jalan',
-		'itemOptions' => array(
-			'class' => 'active'
-		),
-		'url' => array('admin')
-	),
-	array(
-		'label' => 'Instalasi Rawat Inap',
-		'itemOptions' => array(
-			'class' => 'active'
-		),
-		'url' => array('admin')
-	),
-	array(
-		'label' => 'Instalasi Rawat Intensif',
-		'itemOptions' => array(
-			'class' => 'active'
-		),
-		'url' => array('admin')
-	),
-);
 ?>
 
 <?php

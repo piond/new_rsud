@@ -15,24 +15,40 @@ $this->breadcrumbs=array(
 	));
 ?>
 
-<?php $this->widget('booster.widgets.TbDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'varname',
-		'title',
-		'field_type',
-		'field_size',
-		'field_size_min',
-		'required',
-		'match',
-		'range',
-		'error_message',
-		'other_validator',
-		'widget',
-		'widgetparams',
-		'default',
-		'position',
-		'visible',
-	),
-)); ?>
+<?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+<?php 
+	$this->widget('booster.widgets.TbDetailView', array(
+		'data'=>$model,
+		'attributes'=>array(
+			'id',
+			'varname',
+			'title',
+			'field_type',
+			'field_size',
+			'field_size_min',
+			'required',
+			'match',
+			'range',
+			'error_message',
+			'other_validator',
+			'widget',
+			'widgetparams',
+			'default',
+			'position',
+			'visible',
+		),
+	)); 
+?>
+
+<?php $this->endWidget(); ?>

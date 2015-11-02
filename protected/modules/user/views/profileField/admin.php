@@ -4,7 +4,11 @@ $this->breadcrumbs=array(
 	UserModule::t('Manage'),
 );
 ?>
-<h1><?php echo UserModule::t('Manage Profile Fields'); ?></h1>
+<h1>
+	<?php 
+		echo UserModule::t('Manage Profile Fields'); 
+	?>
+</h1>
 
 <?php echo $this->renderPartial('_menu', array(
 		'list'=> array(
@@ -13,35 +17,50 @@ $this->breadcrumbs=array(
 	));
 ?>
 
-<?php $this->widget('booster.widgets.TbGridView', array(
-	'dataProvider'=>$dataProvider,
-	'columns'=>array(
-		'id',
-		'varname',
+<?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
 		array(
-			'name'=>'title',
-			'value'=>'UserModule::t($data->title)',
-		),
-		'field_type',
-		'field_size',
-		//'field_size_min',
-		array(
-			'name'=>'required',
-			'value'=>'ProfileField::itemAlias("required",$data->required)',
-		),
-		//'match',
-		//'range',
-		//'error_message',
-		//'other_validator',
-		//'default',
-		'position',
-		array(
-			'name'=>'visible',
-			'value'=>'ProfileField::itemAlias("visible",$data->visible)',
-		),
-		//*/
-		array(
-			'class'=>'booster.widgets.TbButtonColumn',
-		),
-	),
-)); ?>
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+	<?php 
+		$this->widget('booster.widgets.TbGridView', array(
+			'dataProvider'=>$dataProvider,
+			'columns'=>array(
+				'id',
+				'varname',
+				array(
+					'name'=>'title',
+					'value'=>'UserModule::t($data->title)',
+				),
+				'field_type',
+				'field_size',
+				//'field_size_min',
+				array(
+					'name'=>'required',
+					'value'=>'ProfileField::itemAlias("required",$data->required)',
+				),
+				//'match',
+				//'range',
+				//'error_message',
+				//'other_validator',
+				//'default',
+				'position',
+				array(
+					'name'=>'visible',
+					'value'=>'ProfileField::itemAlias("visible",$data->visible)',
+				),
+				//*/
+				array(
+					'class'=>'booster.widgets.TbButtonColumn',
+				),
+			),
+		));
+	?>
+<?php $this->endWidget(); ?>

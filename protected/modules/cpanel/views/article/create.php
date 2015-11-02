@@ -4,13 +4,9 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
+$this->title = '<h1>Create Article</h1>';
+
 $this->menu=array(
-	array(
-		'label' => 'Article Navigations',
-		'itemOptions' => array(
-			// 'class' => 'nav-header'
-		)
-	),
 	array(
 		'label' => 'List Article',
 		'url' => array(
@@ -25,8 +21,6 @@ $this->menu=array(
 	),
 );
 ?>
-
-<h1>Create Article</h1>
 
 <?php
 	echo $this->renderPartial(

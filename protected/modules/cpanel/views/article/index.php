@@ -3,13 +3,9 @@ $this->breadcrumbs=array(
 	'Articles',
 );
 
+$this->title = '<h1>Articles</h1>';
+
 $this->menu=array(
-	array(
-		'label' => 'Article Navigations',
-		'itemOptions' => array(
-			'class' => 'nav-header'
-		)
-	),
 	array(
 		'label' => 'Create Article',
 		'url' => array('create')
@@ -20,8 +16,6 @@ $this->menu=array(
 	),
 );
 ?>
-
-<h1>Articles</h1>
 
 <?php
 	$box = $this->beginWidget(

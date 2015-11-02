@@ -1,14 +1,22 @@
-<?php $this->breadcrumbs = array(
-	'Rights'=>Rights::getBaseUrl(),
-	Rights::t('core', 'Create :type', array(':type'=>Rights::getAuthItemTypeName($_GET['type']))),
-); ?>
+<?php 
+	$this->breadcrumbs = array(
+		'Rights'=>Rights::getBaseUrl(),
+		Rights::t('core', 'Create :type', array(':type'=>Rights::getAuthItemTypeName($_GET['type']))),
+	); 
+	
+	$this->title = '<h2>'.Rights::t('core', 'Create :type', array(':type'=>Rights::getAuthItemTypeName($_GET['type']),)).'</h2>';
+?>
 
-<div class="createAuthItem">
+<?php
+	echo $this->renderPartial('/_menu',array(
+		'list'=> array(),
+	));
+?>
 
-	<h2><?php echo Rights::t('core', 'Create :type', array(
-		':type'=>Rights::getAuthItemTypeName($_GET['type']),
-	)); ?></h2>
+<?php 
+	$this->renderPartial('/_flash'); 
+?>
 
-	<?php $this->renderPartial('_form', array('model'=>$formModel)); ?>
-
-</div>
+<?php 
+	$this->renderPartial('_form', array('model'=>$formModel)); 
+?>
