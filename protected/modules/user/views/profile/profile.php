@@ -49,12 +49,12 @@
 							'items' => array(
 								array(
 									'label' => 'Edit profile',
-									'url' => array('changepassword'),
+									'url' => array('edit'),
 									'icon' => 'fa fa-edit fa-lg'
 								),
 								array(
 									'label' => 'Change password',
-									'url' => array('edit'),
+									'url' => array('changepassword'),
 									'icon' => 'fa fa-lock fa-lg'
 								)
 							)
