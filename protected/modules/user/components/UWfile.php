@@ -94,7 +94,8 @@ class UWfile {
 		unset($params['options']);
 		
 		return CHtml::activeFileField($model,$field->varname,$params)
-		.(($model->getAttribute($field->varname))?'<br/>'.CHtml::activeCheckBox($model,'[uwfdel]'.$field->varname,$params)
+		// .(($model->getAttribute($field->varname))?'<br/>'.CHtml::activeCheckBox($model,'[uwfdel]'.$field->varname,$params)
+		.(($model->getAttribute($field->varname))?'<br/>'.CHtml::activeCheckBox($model,'[uwfdel]'.$field->varname)
 		.' '.CHtml::activeLabelEx($model,'[uwfdel]'.$field->varname,array('label'=>UserModule::t('Delete file'),'style'=>'display:inline;')):'')
 		;
 	}

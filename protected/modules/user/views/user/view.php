@@ -5,10 +5,25 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav navbar-nav">
+			<li><?php echo CHtml::link(UserModule::t('List User'),array('index')); ?></li>
+		</ul><!-- actions -->
+	</div>
+</div>
 
-<ul class="nav navbar-nav">
-	<li><?php echo CHtml::link(UserModule::t('List User'),array('index')); ?></li>
-</ul><!-- actions -->
+<?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
 
 <?php 
 
@@ -43,4 +58,8 @@ $this->breadcrumbs=array(
 		'attributes'=>$attributes,
 	));
 
+?>
+
+<?php
+	$this->endWidget(); 
 ?>

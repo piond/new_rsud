@@ -16,10 +16,19 @@ h5 {
 h6 {
 	font-size : 1.1em;
 }
-article {
-	border-bottom : 1px dashed  #ccc;
-	margin-bottom : 10px;
-	padding-bottom : 5px;
+html, body {
+	margin :0;
+	padding :0;
+	height : 100%;
+	color : #797979;
+}
+#wrapper {
+	min-height : 100%;
+	position :relative;
+}
+#content {
+	padding-top : 70px;
+	padding-bottom : 100px;
 }
 footer {
 	background-color : #E7E7E7;
@@ -31,20 +40,10 @@ footer {
 	width : 100%;
 	border-top : 1px solid #ddd;
 }
-html, body {
-	margin :0;
-	padding :0;
-	height : 100%;
-	/* margin-top : 30px; */
-	color : #1B1E24;
-}
-#wrapper {
-	min-height : 100%;
-	position :relative;
-}
-#content {
-	padding-top : 70px;
-	padding-bottom : 100px;
+article {
+	border-bottom : 1px dashed  #ccc;
+	margin-bottom : 10px;
+	padding-bottom : 5px;
 }
 .bootstrap-switch,
 .btn,
@@ -71,43 +70,13 @@ html, body {
 	border-color : #66afe9;
 	box-shadow : none;
 }
-.breadcrumb {
-	border : 1px solid #DDD;
-}
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-	background-color : #0288D1;
-	color : #ffffff;
-}
+
 .nav-list .nav-header {
 	padding : 8px 15px;
-	/* text-transform : uppercase; */
 	background-color : #F5F5F5;
 	color : #777;
 	border : 1px solid #DDD;
 }
-.navbar-default {
-	background-color : #337AB7;
-}
-.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-	color : #ffffff;
-}
-.navbar-default .navbar-nav > li > a {
-	color : #ffffff;
-}
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
-	background-color : #0288D1;
-	color : #ffffff;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-	background-color : #0288D1;
-	color : #ffffff;
-}
-.navbar-default .navbar-toggle {
-	border-color : #ffffff;
-}
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-	background-color : #0288D1;
-}
-.navbar-default .navbar-toggle .icon-bar {
-	background-color : #ffffff;
+.panel-default > .panel-heading {
+	color : #777;
 }

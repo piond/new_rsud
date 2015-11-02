@@ -1,6 +1,8 @@
 <div class="form">
 
-<?php echo CHtml::beginForm('','post',array('class' => 'form-horizontal')); ?>
+<?php
+	echo CHtml::beginForm('','post',array('class' => 'form-horizontal'));
+?>
 
 	<div class="alert alert-info">
 		<?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?>
@@ -22,7 +24,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo (($model->id)?CHtml::activeTextField($model,'varname',array('size'=>60,'maxlength'=>50,'readonly'=>true, 'class'=>'form-control')):CHtml::activeTextField($model,'varname',array('size'=>60,'maxlength'=>50, 'class'=>'form-control'))); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'varname'); ?>
 			</span>
 			<span class="help-block">
@@ -37,7 +39,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'title',array('size'=>60,'maxlength'=>255, 'class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'title'); ?>
 			</span>
 			<span class="help-block">
@@ -52,7 +54,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo (($model->id)?CHtml::activeTextField($model,'field_type',array('size'=>60,'maxlength'=>50,'readonly'=>true,'id'=>'field_type', 'class'=>'form-control')):CHtml::activeDropDownList($model,'field_type',ProfileField::itemAlias('field_type'),array('id'=>'field_type', 'class'=>'form-control'))); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'field_type'); ?>
 			</span>
 			<span class="help-block">
@@ -67,7 +69,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo (($model->id)?CHtml::activeTextField($model,'field_size',array('readonly'=>true, 'class'=>'form-control')):CHtml::activeTextField($model,'field_size',array('class'=>'form-control'))); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'field_size'); ?>
 			</span>
 			<span class="help-block">
@@ -82,7 +84,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'field_size_min', array('class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'field_size_min'); ?>
 			</span>
 			<span class="help-block">
@@ -97,7 +99,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeDropDownList($model,'required',ProfileField::itemAlias('required'),array('class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'required'); ?>
 			</span>
 			<span class="help-block">
@@ -112,7 +114,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'match',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'match'); ?>
 			</span>
 			<span class="help-block">
@@ -127,13 +129,13 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'range',array('size'=>60,'maxlength'=>5000,'class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'range'); ?>
 			</span>
 			<span class="help-block">
 				<?php echo UserModule::t('Predefined values (example: 1;2;3;4;5 or 1==One;2==Two;3==Three;4==Four;5==Five).'); ?>
 			</span>
-		</span>
+		</div>
 	</div>
 
 	<div class="form-group">
@@ -142,7 +144,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'error_message',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'error_message'); ?>
 			</span>
 			<span class="help-block">
@@ -157,7 +159,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'other_validator',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'other_validator'); ?>
 			</span>
 			<span class="help-block">
@@ -172,7 +174,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo (($model->id)?CHtml::activeTextField($model,'default',array('size'=>60,'maxlength'=>255,'readonly'=>true,'class'=>'form-control')):CHtml::activeTextField($model,'default',array('size'=>60,'maxlength'=>255,'class'=>'form-control'))); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'default'); ?>
 			</span>
 			<span class="help-block">
@@ -190,7 +192,7 @@
 			list($widgetsList) = ProfileFieldController::getWidgets($model->field_type);
 			echo CHtml::activeDropDownList($model,'widget',$widgetsList,array('id'=>'widgetlist','class'=>'form-control'));
 			//echo CHtml::activeTextField($model,'widget',array('size'=>60,'maxlength'=>255)); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'widget'); ?>
 			</span>
 			<span class="help-block">
@@ -205,7 +207,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'widgetparams',array('size'=>60,'maxlength'=>5000,'id'=>'widgetparams','class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'widgetparams'); ?>
 			</span>
 			<span class="help-block">
@@ -220,7 +222,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeTextField($model,'position',array('class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'position'); ?>
 			</span>
 			<span class="help-block">
@@ -235,7 +237,7 @@
 		</label>
 		<div class="col-sm-9">
 			<?php echo CHtml::activeDropDownList($model,'visible',ProfileField::itemAlias('visible'),array('class'=>'form-control')); ?>
-			<span class="help-inline">
+			<span class="help-block error">
 				<?php echo CHtml::error($model,'visible'); ?>
 			</span>
 		</div>
@@ -254,13 +256,13 @@
 <?php echo CHtml::endForm(); ?>
 
 </div><!-- form -->
-<div id="dialog-form" title="<?php echo UserModule::t('Widget parametrs'); ?>">
+<div id="dialog-form" title="<?php echo UserModule::t('Widget parameters'); ?>">
 	<form>
 	<fieldset>
-		<label for="name">Name</label>
-		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
-		<label for="value">Value</label>
-		<input type="text" name="value" id="value" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="name" class="control-label">Name</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all form-control" />
+		<label for="value" class="control-label">Value</label>
+		<input type="text" name="value" id="value" value="" class="text ui-widget-content ui-corner-all form-control" />
 	</fieldset>
 	</form>
 </div>

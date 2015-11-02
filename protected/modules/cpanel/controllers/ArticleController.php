@@ -67,12 +67,42 @@ class ArticleController extends Controller
 	* Creates a new model.
 	* If creation is successful, the browser will be redirected to the 'view' page.
 	*/
-	public function getAllTags(){
+	protected function getAllTags(){
 		$tags = Tags::model()->findAll();
 		$arrTags = CHtml::listData($tags, 'tag_id', 'tag');
 		
 		return $arrTags;
 	}
+	
+	protected function getArticleTags($id){
+		$tag = array();
+		$criteria = new CDbCriteria(
+			array(
+				'alias' => '_articletags',
+				'condition' => '_articletags.article_id='.$id,
+				'with' => array(
+					'tags' => array(
+						'alias' => '_tags',
+						'order' => 'tag'
+					)
+				)
+			)
+		);
+		$dataProvider = new CActiveDataProvider(
+			'Articletags',array(
+				'criteria'=>$criteria
+			)
+		);
+		
+		foreach($dataProvider->getData() as $tags){
+			$_tagsId = $tags['tags']['tag_id'];
+			$_tagName = $tags['tags']['tag'];
+			
+			$tag[$_tagsId] = $_tagName;
+		}
+		return $tag;
+	}
+	
 	public function actionCreate()
 	{
 		$connection = Yii::app()->db;
@@ -158,25 +188,29 @@ class ArticleController extends Controller
 			try{
 				if($model->save()){
 					$articleId = $model->article_id;
-					$postToLower = strtolower($_POST['Article']['tags']);
-					$arrPostTags = explode(',', $postToLower);
-					$arrDiffTags = array_diff($arrPostTags,$arrTags);
-					if(!empty($arrDiffTags)){
-						foreach($arrDiffTags as $arrDiffTag){
-							$row[] = array('tag'=>$arrDiffTag);
-						}
-						GeneralRepository::insertSeveral(Tags::model()->tableName(),$row);
-					}
+					Articletags::model()->deleteAll('article_id = '.$id);
 					
-					$newArrTags = $this->getAllTags();
-					$newArrDiffTags = array_intersect($newArrTags, $arrPostTags);
-					foreach($newArrDiffTags as $key=>$newArrDiffTag){
-						$newRow[] = array(
-							'article_id' => $articleId,
-							'tag_id' => $key
-						);
+					if($_POST['Article']['tags'] != null){
+						$postToLower = strtolower($_POST['Article']['tags']);
+						$arrPostTags = explode(',', $postToLower);
+						$arrDiffTags = array_diff($arrPostTags,$arrTags);
+						if(!empty($arrDiffTags)){
+							foreach($arrDiffTags as $arrDiffTag){
+								$row[] = array('tag'=>$arrDiffTag);
+							}
+							GeneralRepository::insertSeveral(Tags::model()->tableName(),$row);
+						}
+						
+						$newArrTags = $this->getAllTags();
+						$newArrDiffTags = array_intersect($newArrTags, $arrPostTags);
+						foreach($newArrDiffTags as $key=>$newArrDiffTag){
+							$newRow[] = array(
+								'article_id' => $articleId,
+								'tag_id' => $key
+							);
+						}
+						GeneralRepository::insertSeveral(Articletags::model()->tableName(),$newRow);
 					}
-					GeneralRepository::insertSeveral(Articletags::model()->tableName(),$newRow);
 					
 					$transaction->commit();
 					$this->redirect(array('view','id'=>$model->article_id));
@@ -191,7 +225,8 @@ class ArticleController extends Controller
 		$this->render(
 			'update',
 			array(
-				'model'=>$model
+				'model'=>$model,
+				'initTag' => $this->getArticleTags($id)
 			)
 		);
 	}
@@ -349,6 +384,6 @@ class ArticleController extends Controller
 			)
 		);
 		
-		print_r($dataProvider3->getData());
+		print_r($this->getArticleTags(1));
 	}
 }

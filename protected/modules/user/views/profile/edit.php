@@ -17,6 +17,18 @@
 ?>
 
 <?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+<?php
 	if(Yii::app()->user->hasFlash('profileMessage')):
 ?>
 	<div class="alert alert-success" role="alert">
@@ -147,4 +159,6 @@
 	?>
 	</div>
 	
+<?php $this->endWidget(); ?>
+
 <?php $this->endWidget(); ?>

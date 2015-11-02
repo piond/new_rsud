@@ -19,7 +19,8 @@ $this->breadcrumbs=array(
 	echo $this->renderPartial(
 		'_form',
 		array(
-			'model'=>$model
+			'model' => $model,
+			'initTag' => $initTag
 		)
 	);
 ?>

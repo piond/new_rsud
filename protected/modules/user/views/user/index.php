@@ -9,24 +9,41 @@
 		echo UserModule::t("List User");
 	?>
 </h1>
+<div class="row">
+	<div class="col-md-12">
+		<?php
+			if(UserModule::isAdmin()) {
+		?>
+				<ul class="nav navbar-nav">
+					<li>
+						<?php
+							echo CHtml::link(UserModule::t('Manage User'),array('/user/admin'));
+						?>
+					</li>
+					<li>
+						<?php
+							echo CHtml::link(UserModule::t('Manage Profile Field'),array('profileField/admin'));
+						?>
+					</li>
+				</ul><!-- actions -->
+		<?php 
+			}
+		?>
+	</div>
+</div>
+
 <?php
-	if(UserModule::isAdmin()) {
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
 ?>
-		<ul class="nav navbar-nav">
-			<li>
-				<?php
-					echo CHtml::link(UserModule::t('Manage User'),array('/user/admin'));
-				?>
-			</li>
-			<li>
-				<?php
-					echo CHtml::link(UserModule::t('Manage Profile Field'),array('profileField/admin'));
-				?>
-			</li>
-		</ul><!-- actions -->
-<?php 
-	}
-?>
+
 <?php
 	$this->widget(
 		'booster.widgets.TbGridView',
@@ -49,4 +66,8 @@
 			),
 		)
 	);
+?>
+
+<?php
+	$this->endWidget(); 
 ?>

@@ -1,4 +1,16 @@
 <?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+<?php
 	$form=$this->beginWidget(
 		'booster.widgets.TbActiveForm',
 		array(
@@ -44,7 +56,7 @@
 								'onText' => 'Yes',
 								'offText' => 'No',
 								'onColor' => 'success',
-								'offColor' => 'danger'
+								'offColor' => 'default'
 							),
 							'events' => array(
 								'switchChange' => 'js:function(event, state) {
@@ -187,6 +199,11 @@
 	?>
 	
 	<?php
+		if(isset($initTag)){
+			$initTag = implode($initTag, ',');
+			$model['tags'] = $initTag;
+		}
+		
 		$tags = Tags::model()->findAll(array('order'=>'tag'));
 		foreach($tags as $tag){
 			$arrTags[] = $tag->tag;
@@ -213,11 +230,17 @@
 	?>
 
 <div class="form-actions text-right">
-	<?php $this->widget('booster.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
-		)); ?>
+	<?php
+		$this->widget(
+			'booster.widgets.TbButton', array(
+				'buttonType'=>'submit',
+				'context'=>'primary',
+				'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			)
+		);
+	?>
 </div>
+
+<?php $this->endWidget(); ?>
 
 <?php $this->endWidget(); ?>

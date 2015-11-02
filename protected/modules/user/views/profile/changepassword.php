@@ -17,6 +17,18 @@
 ?>
 
 <?php
+	$box = $this->beginWidget(
+		'booster.widgets.TbPanel',
+		array(
+			'title' => false,
+			// 'headerIcon' => 'th-list',
+			'padContent' => true,
+			// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+		)
+	);
+?>
+
+<?php
 	$form=$this->beginWidget(
 		'booster.widgets.TbActiveForm',
 		array(
@@ -96,6 +108,10 @@
 		));
 	?>
 	</div>
+
+<?php
+	$this->endWidget();
+?>
 
 <?php
 	$this->endWidget();

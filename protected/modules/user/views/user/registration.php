@@ -1,97 +1,203 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Registration");
-$this->breadcrumbs=array(
-	UserModule::t("Registration"),
-);
+<?php
+	$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Registration");
+	// $this->breadcrumbs=array(
+		// UserModule::t("Registration"),
+	// );
 ?>
-
-<h1><?php echo UserModule::t("Registration"); ?></h1>
-
-<?php if(Yii::app()->user->hasFlash('registration')): ?>
-<div class="success">
-<?php echo Yii::app()->user->getFlash('registration'); ?>
-</div>
-<?php else: ?>
-
-<div class="form">
-<?php $form=$this->beginWidget('UActiveForm', array(
-	'id'=>'registration-form',
-	'enableAjaxValidation'=>true,
-	'disableAjaxValidationAttributes'=>array('RegistrationForm_verifyCode'),
-	'htmlOptions' => array('enctype'=>'multipart/form-data'),
-)); ?>
-
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
-	
-	<?php echo $form->errorSummary(array($model,$profile)); ?>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'username'); ?>
-	<?php echo $form->textField($model,'username'); ?>
-	<?php echo $form->error($model,'username'); ?>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'password'); ?>
-	<?php echo $form->passwordField($model,'password'); ?>
-	<?php echo $form->error($model,'password'); ?>
-	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
-	</p>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'verifyPassword'); ?>
-	<?php echo $form->passwordField($model,'verifyPassword'); ?>
-	<?php echo $form->error($model,'verifyPassword'); ?>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'email'); ?>
-	<?php echo $form->textField($model,'email'); ?>
-	<?php echo $form->error($model,'email'); ?>
-	</div>
-	
-<?php 
-		$profileFields=$profile->getFields();
-		if ($profileFields) {
-			foreach($profileFields as $field) {
-			?>
-	<div class="row">
-		<?php echo $form->labelEx($profile,$field->varname); ?>
-		<?php 
-		if ($field->widgetEdit($profile)) {
-			echo $field->widgetEdit($profile);
-		} elseif ($field->range) {
-			echo $form->dropDownList($profile,$field->varname,Profile::range($field->range));
-		} elseif ($field->field_type=="TEXT") {
-			echo$form->textArea($profile,$field->varname,array('rows'=>6, 'cols'=>50));
-		} else {
-			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
-		}
-		 ?>
-		<?php echo $form->error($profile,$field->varname); ?>
-	</div>	
+<div class="container">
+<div class="row">
+	<div class="form-registration">
+		<h1>
 			<?php
-			}
-		}
-?>
-	<?php if (UserModule::doCaptcha('registration')): ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'verifyCode'); ?>
-		
-		<?php $this->widget('CCaptcha'); ?>
-		<?php echo $form->textField($model,'verifyCode'); ?>
-		<?php echo $form->error($model,'verifyCode'); ?>
-		
-		<p class="hint"><?php echo UserModule::t("Please enter the letters as they are shown in the image above."); ?>
-		<br/><?php echo UserModule::t("Letters are not case-sensitive."); ?></p>
-	</div>
-	<?php endif; ?>
-	
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Register")); ?>
-	</div>
+				echo UserModule::t("Registration");
+			?>
+		</h1>
 
-<?php $this->endWidget(); ?>
-</div><!-- form -->
-<?php endif; ?>
+		<?php
+			$box = $this->beginWidget(
+				'booster.widgets.TbPanel',
+				array(
+					'title' => false,
+					// 'headerIcon' => 'th-list',
+					'padContent' => true,
+					// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
+				)
+			);
+		?>
+				
+		<?php
+			if(Yii::app()->user->hasFlash('registration')):
+		?>
+				<div class="success">
+					<?php
+						echo Yii::app()->user->getFlash('registration');
+					?>
+				</div>
+		<?php
+			else:
+		?>
+				<?php
+					$form=$this->beginWidget(
+						'booster.widgets.TbActiveForm',
+						array(
+							'id'=>'article-form',
+							'type' => 'horizontal',
+							'enableAjaxValidation'=>false,
+						)
+					);
+				?>
+
+					<div class="alert alert-info">
+						<?php
+							echo UserModule::t('Fields with <span class="required">*</span> are required.');
+						?>
+					</div>
+					
+					<?php
+						echo $form->errorSummary(array($model,$profile));
+					?>
+					
+					<?php
+						echo $form->textFieldGroup(
+							$model,
+							'username',
+							array(
+								'widgetOptions' => array(
+									'htmlOptions' => array(
+									)
+								)
+							)
+						);
+					?>
+					
+					<?php
+						echo $form->passwordFieldGroup(
+							$model,
+							'password',
+							array(
+								'widgetOptions' => array(
+									'htmlOptions' => array(
+									)
+								),
+								'hint' => UserModule::t("Minimal password length 4 symbols.")
+							)
+						);
+					?>
+					
+					<?php
+						echo $form->passwordFieldGroup(
+							$model,
+							'verifyPassword',
+							array(
+								'widgetOptions' => array(
+									'htmlOptions' => array(
+									)
+								),
+								// 'hint' => UserModule::t("Minimal password length 4 symbols.")
+							)
+						);
+					?>
+					
+					<?php
+						echo $form->textFieldGroup(
+							$model,
+							'email',
+							array(
+								'widgetOptions' => array(
+									'htmlOptions' => array(
+									)
+								),
+								// 'hint' => UserModule::t("Minimal password length 4 symbols.")
+							)
+						);
+					?>
+					
+					<?php 
+						$profileFields=$profile->getFields();
+						
+						if ($profileFields) {
+							foreach($profileFields as $field) {
+					?>
+							<div class="form-group">
+								<?php
+									echo $form->labelEx($profile,$field->varname,array('class'=>'col-sm-3 control-label'));
+								?>
+								<div class="col-sm-9">
+								<?php 
+									if ($field->widgetEdit($profile)) {
+										echo $field->widgetEdit($profile, array('class'=>'form-control'));
+									} elseif ($field->range) {
+										echo $form->dropDownList($profile,$field->varname,Profile::range($field->range),array('class'=>'form-control'));
+									} elseif ($field->field_type=="TEXT") {
+										echo$form->textArea($profile,$field->varname,array('rows'=>6, 'cols'=>50, 'class'=>'form-control'));
+									} else {
+										echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255),'class'=>'form-control'));
+									}
+								 ?>
+								<?php
+									echo $form->error($profile,$field->varname);
+								?>
+								</div>
+							</div>	
+					<?php
+							}
+						}
+					?>
+
+					<?php
+						if (UserModule::doCaptcha('registration')):
+					?>
+							<div class="form-group">
+								<?php
+									echo $form->labelEx($model,'verifyCode',array('class'=>'control-label col-sm-3'));
+								?>
+								<div class="col-sm-9">
+									<?php
+										$this->widget('CCaptcha');
+									?>
+									<?php
+										echo $form->textField($model,'verifyCode',array('class'=>'form-control'));
+									?>
+									<?php
+										echo $form->error($model,'verifyCode');
+									?>
+									
+									<div class="help-block">
+										<?php 
+											echo UserModule::t("Please enter the letters as they are shown in the image above.");
+										?>
+										<br/>
+										<?php
+											echo UserModule::t("Letters are not case-sensitive.");
+										?>
+									</div>
+								</div>
+							</div>
+					<?php
+						endif;
+					?>
+					
+					<div class="form-actions text-right">
+						<?php
+							$this->widget(
+								'booster.widgets.TbButton', array(
+									'buttonType'=>'submit',
+									'context'=>'primary',
+									'label'=>'Register',
+								)
+							);
+						?>
+					</div>
+
+				<?php
+					$this->endWidget();
+				?>
+			<?php
+				endif;
+			?>
+		<?php
+			$this->endWidget();
+		?>
+	</div>
+</div>
+</div>

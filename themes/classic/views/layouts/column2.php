@@ -17,22 +17,6 @@
 		<section class="col-md-3">
 			<aside>
 				<?php
-					$box = $this->beginWidget(
-						'booster.widgets.TbPanel',
-						array(
-							'title' => false,
-							// 'headerIcon' => 'th-list',
-							'padContent' => true,
-							// 'htmlOptions' => array('class' => 'bootstrap-widget-table')
-						)
-					);
-				?>
-					dsdsd
-				<?php
-					$this->endWidget(); 
-				?>
-
-				<?php
 					$this->widget(
 						'booster.widgets.TbMenu',
 						array(
