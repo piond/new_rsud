@@ -1,5 +1,5 @@
 <section>
-<article>
+<article class="<?php if($data->lookup['name'] == 'Draft'){ echo 'draft'; } ?>" >
 	<hgroup>
 		<h1>
 			<?php
@@ -7,14 +7,12 @@
 				echo CHtml::link(CHtml::encode($data->title),array('view','id'=>$data->article_id));
 			?>
 			<?php
-				if(CHtml::encode($data->published) == 0){
-					echo '<small><code>unPublished</code></small>';
-				}
+				echo $data->lookup['name'];
 			?>
 		</h1>
 		<h6>
 			<small>
-			Posted by <a href=""><?php echo Yii::app()->user->name; ?></a> on <?php echo CHtml::encode($data->createdAt); ?>
+			Posted by <a href=""><?php echo $data->author->username; ?></a> on <?php echo CHtml::encode($data->createdAt); ?>
 			</small>
 		</h6>
 	</hgroup>

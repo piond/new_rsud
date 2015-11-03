@@ -276,11 +276,20 @@ class ArticleController extends Controller
 						'alias' => '_articletags',
 						'with' => array(
 							'tags' => array(
-								'alias' => '_tags'
+								'alias' => '_tags',
+								'order' => '_tags.tag'
 							)
 						)
+					),
+					'author' => array(
+						'alias' => '_author'
+					),
+					'lookup' => array(
+						'alias' => '_lookup',
+						// 'order' => '_lookup.id'
 					)
-				)
+				),
+				'order' => '_article.article_id DESC'
 			)
 		);
 		

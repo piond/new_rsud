@@ -1,29 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "_article".
+ * This is the model class for table "_lookup".
  *
- * The followings are the available columns in table '_article':
- * @property integer $article_id
- * @property string $title
- * @property string $content
- * @property string $createdAt
- * @property string $modifiedAt
- * @property integer $published
- * @property integer $author_id
- * @property integer $views
- * @property integer $category_id
+ * The followings are the available columns in table '_lookup':
+ * @property integer $id
+ * @property string $name
+ * @property integer $code
+ * @property string $type
+ * @property integer $position
  */
-class Article extends CActiveRecord
+class Lookup extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
-	public $tags;
-	
 	public function tableName()
 	{
-		return '_article';
+		return '_lookup';
 	}
 
 	/**
@@ -34,13 +28,12 @@ class Article extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, createdAt, published, author_id, category_id', 'required'),
-			// array('title, createdAt, modifiedAt, published, author_id, views, category_id', 'required'),
-			array('published, author_id, views, category_id', 'numerical', 'integerOnly'=>true),
-			array('content', 'safe'),
+			array('name, code, type, position', 'required'),
+			array('code, position', 'numerical', 'integerOnly'=>true),
+			array('name, type', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('article_id, title, content, createdAt, modifiedAt, published, author_id, views, category_id', 'safe', 'on'=>'search'),
+			array('id, name, code, type, position', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,9 +45,6 @@ class Article extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'articletags' => array(self::HAS_MANY, 'Articletags', 'article_id'),
-			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
-			'lookup' => array(self::BELONGS_TO, 'Lookup', 'published')
 		);
 	}
 
@@ -64,15 +54,11 @@ class Article extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'article_id' => 'ID',
-			'title' => 'Title',
-			'content' => 'Content',
-			'createdAt' => 'Created At',
-			'modifiedAt' => 'Modified At',
-			'published' => 'Published',
-			'author_id' => 'Author',
-			'views' => 'Views',
-			'category_id' => 'Category',
+			'id' => 'ID',
+			'name' => 'Name',
+			'code' => 'Code',
+			'type' => 'Type',
+			'position' => 'Position',
 		);
 	}
 
@@ -94,15 +80,11 @@ class Article extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('article_id',$this->article_id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('createdAt',$this->createdAt,true);
-		$criteria->compare('modifiedAt',$this->modifiedAt,true);
-		$criteria->compare('published',$this->published);
-		$criteria->compare('author_id',$this->author_id);
-		$criteria->compare('views',$this->views);
-		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('code',$this->code);
+		$criteria->compare('type',$this->type,true);
+		$criteria->compare('position',$this->position);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -113,7 +95,7 @@ class Article extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Article the static model class
+	 * @return Lookup the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
